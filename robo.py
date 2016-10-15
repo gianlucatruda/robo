@@ -29,35 +29,43 @@ def my_round(x):
     else:
         return int(x)
 
-# User input is take in.
-in_values = input("\nPlease enter a set of instructions of the form \n"
-                  "UP 5, DOWN 3, LEFT 3, RIGHT 2, UP 2, LEFT 1\n\n")
+def robo():
+    """
+    When run, the function takes user input, processes the instructions, and returns the appropriate value.
+    :return: an integer representing the result.
+    """
+    # User input is take in.
+    in_values = input("\nPlease enter a set of instructions of the form \n"
+                      "UP 5, DOWN 3, LEFT 3, RIGHT 2, UP 2, LEFT 1\n\n")
 
-# The input is split into individual strings and fed into the array.
-instructions = []
-for s in in_values.split(", "):
-    instructions.append(s)
+    # The input is split into individual strings and fed into the array.
+    instructions = []
+    for s in in_values.split(", "):
+        instructions.append(s)
 
-# Variables for the change in each plane are instantiated.
-x_delta = 0
-y_delta = 0
+    # Variables for the change in each plane are instantiated.
+    x_delta = 0
+    y_delta = 0
 
-# Every instruction from the given input is processed and the if-statements filter the changes to the
-# appropriate delta value with the appropriate sign.
-for e in instructions:
-    if "UP" in e:
-        x_delta += int(e[e.find(" ")+1:])
-    elif "DOWN" in e:
-        x_delta -= int(e[e.find(" ")+1:])
-    elif "LEFT" in e:
-        y_delta += int(e[e.find(" ")+1:])
-    elif "RIGHT" in e:
-        y_delta -= int(e[e.find(" ")+1:])
+    # Every instruction from the given input is processed and the if-statements filter the changes to the
+    # appropriate delta value with the appropriate sign.
+    for e in instructions:
+        if "UP" in e:
+            x_delta += int(e[e.find(" ")+1:])
+        elif "DOWN" in e:
+            x_delta -= int(e[e.find(" ")+1:])
+        elif "LEFT" in e:
+            y_delta += int(e[e.find(" ")+1:])
+        elif "RIGHT" in e:
+            y_delta -= int(e[e.find(" ")+1:])
 
-# The resulting delta values in both planes are processed with the Pythagorean equation
-# and rounded using my custom rounding function.
-out_val = my_round((math.sqrt(math.pow(x_delta, 2) + math.pow(y_delta, 2))))
+    # The resulting delta values in both planes are processed with the Pythagorean equation
+    # and rounded using my custom rounding function.
+    out_val = my_round((math.sqrt(math.pow(x_delta, 2) + math.pow(y_delta, 2))))
 
-# Output to command line.
-print(out_val)
+    return out_val
+
+# When the file is run directly, the 'robo' function is called and the results printed to screen.
+if __name__ == '__main__':
+    print(robo())
 
